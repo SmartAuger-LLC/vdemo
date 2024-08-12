@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIRTUALDEMO</title>
+    <style>
+        /* Ensure images are displayed without gaps */
+        img {
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        /* Center the table on the screen */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFFFFF;
+        }
+
+        /* Hide the video initially */
+        #videoPlayer {
+            display: none;
+            width: 526px;
+            height: 293px;
+            background-color: #000;
+        }
+
+        /* Adjusted splash content */
+        #splashContent, #interactiveMap {
+            display: none;
+            width: 526px;
+            height: 293px;
+            position: relative;
+        }
+
+        .splash-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensure rows are tightly packed */
+        }
+
+        .splash-row {
+            display: flex;
+            width: 100%;
+        }
+
+        .splash-row img {
+            flex-grow: 1;
+            object-fit: contain;
+        }
+
+        .top-row {
+            height: 46px; /* Explicitly set the height to match the top images */
+            position: relative;
+        }
+
+        .bottom-row {
+            height: 247px; /* Explicitly set the height to match the bottom images */
+        }
+
+        /* Style for the time overlay */
+        #liveTime {
+            position: absolute;
+            top: 50%;
+            left: 10px; /* Align the time slightly to the right of the left edge of the time.png */
+            transform: translateY(-50%);
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Style for the interactive map */
+        #interactiveMap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Save for Web Slices (VIRTUALDEMO.psd) -->
+    <table id="Table_01" width="667" height="460" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="9">
+                <img src="images/VIRTUALDEMO_01.png" width="667" height="65" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4">
+                <img src="images/VIRTUALDEMO_02.png" width="67" height="395" alt="">
+            </td>
+            <td colspan="7" id="divPlaceholder">
+                <img src="images/DIV.png" width="526" height="293" alt="">
+                <video id="videoPlayer" width="526" height="293">
+                    <source src="battery.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div id="interactiveMap">
+                    <!-- Interactive map embedded via iframe (e.g., Google Maps) -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434508504!2d144.96305761531657!3d-37.81421797975167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce740!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1615687871196!5m2!1sen!2sus"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+                <!-- Splash Page Content -->
+                <div id="splashContent">
+                    <div class="splash-container">
+                        <div class="splash-row top-row">
+                            <img src="images/time.png" alt="Time" width="142" height="46">
+                            <div id="liveTime"></div> <!-- Live time display -->
+                            <img src="images/splashpage_02.png" alt="Center" width="214" height="46">
+                            <img src="images/settings.png" alt="Settings" width="170" height="46">
+                        </div>
+                        <div class="splash-row bottom-row">
+                            <img src="images/gridscan.png" alt="Grid Scan" width="166" height="247" onclick="playGridScan()">
+                            <img src="images/linescan.png" alt="Line Scan" width="190" height="247">
+                            <img src="images/mapview.png" alt="Map View" width="170" height="247" onclick="showMapView()">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td rowspan="4">
+                <img src="images/VIRTUALDEMO_04.png" width="74" height="395" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7">
+                <img src="images/VIRTUALDEMO_05.png" width="526" height="17" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                <img src="images/VIRTUALDEMO_06.png" width="147" height="85" alt="">
+            </td>
+            <td>
+                <img src="images/leftbutton.png" width="67" height="49" alt="" onclick="goBackToSplashPage()">
+            </td>
+            <td rowspan="2">
+                <img src="images/VIRTUALDEMO_08.png" width="16" height="85" alt="">
+            </td>
+            <td>
+                <img src="images/centerbutton.png" id="centerButton" width="66" height="49" alt="" onclick="playBatteryVideo()">
+            </td>
+            <td rowspan="2">
+                <img src="images/VIRTUALDEMO_10.png" width="16" height="85" alt="">
+            </td>
+            <td>
+                <img src="images/rightbutton.png" width="66" height="49" alt="">
+            </td>
+            <td rowspan="2">
+                <img src="images/VIRTUALDEMO_12.png" width="148" height="85" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="images/VIRTUALDEMO_13.png" width="67" height="36" alt="">
+            </td>
+            <td>
+                <img src="images/VIRTUALDEMO_14.png" width="66" height="36" alt="">
+            </td>
+            <td>
+                <img src="images/VIRTUALDEMO_15.png" width="66" height="36" alt="">
+            </td>
+        </tr>
+    </table>
+    <!-- End Save for Web Slices -->
+
+    <script>
+        function playBatteryVideo() {
+            var divPlaceholder = document.getElementById('divPlaceholder');
+            var video = document.getElementById('videoPlayer');
+            var splashContent = document.getElementById('splashContent');
+
+            // Hide the div.png and splash content and play the battery video
+            divPlaceholder.querySelector('img').style.display = 'none';
+            splashContent.style.display = 'none';
+            video.src = 'battery.mp4';
+            video.style.display = 'block';
+            video.play();
+
+            // When the battery video ends, prepare for the loading screen
+            video.onended = function() {
+                prepareForLoadingScreen();
+            };
+        }
+
+        function prepareForLoadingScreen() {
+            var centerButton = document.getElementById('centerButton');
+
+            // Change the onclick function to play the loading screen video
+            centerButton.onclick = function() {
+                playLoadingScreen();
+            };
+        }
+
+        function playLoadingScreen() {
+            var video = document.getElementById('videoPlayer');
+
+            // Set the video source to the loading screen video
+            video.src = 'loadingscreen.mp4';
+            video.style.display = 'block';
+            video.play();
+
+            // When the loading screen video ends, show the splash page content
+            video.onended = function() {
+                showSplashContent();
+            };
+        }
+
+        function showSplashContent() {
+            var splashContent = document.getElementById('splashContent');
+            var video = document.getElementById('videoPlayer');
+
+            // Hide the video and show the splash content
+            video.style.display = 'none';
+            splashContent.style.display = 'block';
+
+            // Re-enable the center button for another interaction
+            enableCenterButton();
+        }
+
+		function playGridScan() {
+            var video = document.getElementById('videoPlayer');
+            var splashContent = document.getElementById('splashContent');
+
+            // Hide the splash content and play the first grid scan video
+            splashContent.style.display = 'none';
+            video.src = 'gridscanprep.mp4';
+            video.style.display = 'block';
+            video.play();
+
+            // Play the second grid scan video after the first one ends
+            video.onended = function() {
+                video.src = 'gridfinal.mp4';
+                video.play();
+
+                // Enable the left button after the second video ends to go back to the splash page
+                video.onended = function() {
+                    enableLeftButton(); 
+                };
+            };
+        }
+
+        function showMapView() {
+            var interactiveMap = document.getElementById('interactiveMap');
+            var splashContent = document.getElementById('splashContent');
+
+            // Hide the splash content and show the interactive map
+            splashContent.style.display = 'none';
+            interactiveMap.style.display = 'block';
+
+            enableLeftButton(); // Enable the left button to go back to the splash page
+        }
+
+        function goBackToSplashPage() {
+            var video = document.getElementById('videoPlayer');
+            var interactiveMap = document.getElementById('interactiveMap');
+            var splashContent = document.getElementById('splashContent');
+
+            // Hide the video and map, show the splash content
+            video.style.display = 'none';
+            interactiveMap.style.display = 'none';
+            splashContent.style.display = 'block';
+
+            // Disable the left button once back at the splash page
+            disableButtons();
+        }
+
+        function enableLeftButton() {
+            var leftButton = document.querySelector('img[alt="leftbutton"]');
+            leftButton.onclick = goBackToSplashPage;
+            leftButton.style.cursor = 'pointer';
+        }
+
+        function enableCenterButton() {
+            var centerButton = document.getElementById('centerButton');
+            centerButton.onclick = playBatteryVideo;
+            centerButton.style.cursor = 'pointer';
+        }
+
+        function disableButtons() {
+            var buttons = document.querySelectorAll('img[alt="leftbutton"], img[alt="centerbutton"], img[alt="rightbutton"]');
+            buttons.forEach(function(button) {
+                button.onclick = null;
+                button.style.cursor = 'default';
+            });
+        }
+
+        function updateTime() {
+            const timeElement = document.getElementById('liveTime');
+            const now = new Date();
+
+            // Convert to EST (Eastern Standard Time)
+            const options = { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const timeString = now.toLocaleTimeString('en-US', options);
+
+            timeElement.textContent = timeString;
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to display time immediately
+    </script>
+</body>
+</html>
+
